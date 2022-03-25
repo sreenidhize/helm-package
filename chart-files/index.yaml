@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  bc-15:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-03-25T08:19:36.125849516+05:30"
+    description: A Helm chart for Kubernetes
+    digest: f9aeb76de509cf19907a52eba8d61717d53d5648122b9edb07a2a0c473ff9211
+    name: bc-15
+    type: application
+    urls:
+    - https://bc-15.com/charts/bc-15-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-03-25T08:19:36.124365758+05:30"
