@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: srinidhi2020/react-fr:v2
+          ports:
+            - containerPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  labels:
+    app: bc-15
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bc-15
+  template:
+    metadata:
+      labels:
+        app: bc-15
+    spec:
+      containers:
+      - name: db
+        image: dhanrajnath/postgres
+        env:
+         - name: POSTGRES_USER
+           value: jobs_usr
+         - name: POSTGRES_PASSWORD
+           value: us3rs
+         - name: POSTGRES_DB
+           value: jobs
+        ports:
+        - containerPort: 5432
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: bc-15
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bc-15
+  template:
+    metadata:
+      labels:
+        app: bc-15
+    spec:
+      containers:
+      - name: bc-15
+        image: srinidhi2020/springnew:v1
+        env:
+         - name: SPRING_DATASOURCE_URL
+           value: jdbc:postgresql://database:5432/jobs
+         - name: SPRING_DATASOURCE_USERNAME
+           value: jobs_usr
+         - name: SPRING_DATASOURCE_PASSWORD
+           value: us3rs
+         - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+           value: update
+        ports:
+        ports:
+        - containerPort: 8080
